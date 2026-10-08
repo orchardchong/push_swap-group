@@ -1,0 +1,5 @@
+*.txt
+*.gch
+test.c
+*.a
+printfTester/

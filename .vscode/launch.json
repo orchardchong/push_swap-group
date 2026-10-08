@@ -1,0 +1,46 @@
+/* Flow of debugging using launch.json
+F5
+ ↓
+Read launch.json
+ ↓
+See "preLaunchTask": "build-debug"
+ ↓
+Run the build task
+ ↓
+make debug MAIN="..."
+ ↓
+Create ./a.out
+ ↓
+Start GDB
+ ↓
+GDB runs ./a.out
+*/
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Debug rotations",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build-debug",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
