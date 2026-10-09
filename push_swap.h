@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/08 16:37:31 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/10 01:30:25 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,19 @@ void	ss(t_stack *stack_a, t_stack *stack_b);
 void	pa(t_stack *stack_a, t_stack *stack_b);
 void	pb(t_stack *stack_a, t_stack *stack_b);
 
+//disorder metric
+float	disorder_metrics(t_stack *stack_a);
+
+//parsing
+int		is_num(char *str);
+long	ft_atol(const char *str);
+int		check_duplicate(t_stack *stack_a, int digit);
+
+//to free array & free node
+void	free_array(char **array);
+void	free_and_erase (t_stack *stack_a, char **array, int is_split);
+
+//to check main
+void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split);
 
 #endif 
