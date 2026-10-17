@@ -55,14 +55,16 @@ void	print_array(int *array, int size)
 int	main(int argc, char *argv[])
 {
 	t_stack	stack_a;
+	t_stack stack_b;
 	char	**args;
 	int		is_split; //to check "1 2" or 1 2
-	t_node	*current;
+	// t_node	*current;
 	int		*arr;
-	int		bit_pos;
 
 	stack_a.top = NULL;
 	stack_a.size = 0;
+	stack_b.top = NULL;
+	stack_b.size = 0;
 	is_split = 0;
 	arr = NULL;
 
@@ -81,25 +83,35 @@ int	main(int argc, char *argv[])
 	check_parsing_create_node(&stack_a, args, is_split);
 	arr = get_int_arr(args, stack_a.size);
 	insertion_sort(arr, stack_a.size);
-	bit_pos = get_max_num_bits_count(arr[stack_a.size - 1]) - 1;
-	print_array(arr, stack_a.size);
+	// print_array(arr, stack_a.size);
 	assign_sorted_index(&stack_a, arr);
 
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
-	printf("Parsing Success! Size: %d\n", stack_a.size);
-	if (stack_a.top != NULL)
-	{
-		current = stack_a.top;
-		printf("Stack A: ");
-		while (current->next != stack_a.top)
-		{
-			printf("%d (%d) -> ", current->num, current->sorted_index);
-			current = current->next;
-		}
-		printf("%d (%d)\n ", current->num, current->sorted_index);
-	}
-	ft_printf("Max bit count: %d \n", max_bit_count);
+	// printf("Parsing Success! Size: %d\n", stack_a.size);
+	// if (stack_a.top != NULL)
+	// {
+	// 	current = stack_a.top;
+	// 	printf("Stack A: ");
+	// 	while (current->next != stack_a.top)
+	// 	{
+	// 		printf("%d (%d) -> ", current->num, current->sorted_index);
+	// 		current = current->next;
+	// 	}
+	// 	printf("%d (%d)\n ", current->num, current->sorted_index);
+	// }
+	radix_sort(&stack_a, &stack_b, arr[stack_a.size - 1]);
+	// if (stack_a.top != NULL)
+	// {
+	// 	current = stack_a.top;
+	// 	printf("Stack A: ");
+	// 	while (current->next != stack_a.top)
+	// 	{
+	// 		printf("%d (%d) -> ", current->num, current->sorted_index);
+	// 		current = current->next;
+	// 	}
+	// 	printf("%d (%d)\n ", current->num, current->sorted_index);
+	// }
 	ft_clearstack(&stack_a);
 	free(arr);
 	return (0);

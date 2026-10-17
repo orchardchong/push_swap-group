@@ -3,3 +3,4 @@
 test.c
 .normignore
 *.txt
+checker_linux

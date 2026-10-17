@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 08:17:19 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 11:45:10 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 13:46:22 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int	get_max_num_bits_count(int max)
 }
 
 /*
-NOTE: bit_post should be max_bit_count - 1 at start
 Count how many 0s or 1s at the specific bit location. To stop early
 when all the 0s or 1s are found, saving ops count and some processing power.
 
@@ -138,9 +137,9 @@ rra  (undo 1 rotation)         ra   ← wasted
                       		   rra ×3 (undo all 3 rotations)
 = 3 ops                        = 7 ops
 */
-int	count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit)
+int	count_matching_bit(t_stack *stack, int stacksize, int bit_pos, int bit)
 {
-	t_node *curr;
+	t_node	*curr;
 	int		count;
 
 	count = 0;

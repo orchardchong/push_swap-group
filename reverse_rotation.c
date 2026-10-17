@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 08:53:38 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 08:49:22 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 18:30:57 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	rrb(t_stack *stack, int print_rrr)
 	stack -> top = stack -> top -> prev;
 	if (!print_rrr)
 		ft_printf("rrb\n");
-
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)

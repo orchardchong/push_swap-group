@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 11:47:36 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 18:29:25 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	pa(t_stack *stack_a, t_stack *stack_b);
 void	pb(t_stack *stack_a, t_stack *stack_b);
 
 //radix and its utils
+void	radix_sort(t_stack *a, t_stack *b, int max);
 int		*get_int_arr(char **args, int size);
 void	insertion_sort(int *arr, int size);
 void	assign_sorted_index(t_stack *stack, int *sorted_array);
