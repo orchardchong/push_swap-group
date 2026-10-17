@@ -6,27 +6,27 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 08:53:38 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 08:36:47 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 08:49:22 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_stack *stack, int print_both)
+void	rra(t_stack *stack, int print_rrr)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> prev;
-	if (!print_both)
+	if (!print_rrr)
 		ft_printf("rra\n");
 }
 
-void	rrb(t_stack *stack, int print_both)
+void	rrb(t_stack *stack, int print_rrr)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> prev;
-	if (!print_both)
+	if (!print_rrr)
 		ft_printf("rrb\n");
 
 }
