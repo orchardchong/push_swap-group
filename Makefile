@@ -8,7 +8,8 @@ FUNCS	= disorder_metrics \
 		  rotation \
 		  stack \
 		  swap \
-		  to_clear_and_erase
+		  to_clear_and_erase \
+		  radix_utils
 
 SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)

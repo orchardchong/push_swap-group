@@ -42,11 +42,13 @@ void	print_array(int *array, int size)
 	int	i;
 
 	i = 0;
+	ft_printf("arr: ");
 	while (i < size)
 	{
-		ft_printf("%d\n", array[i]);
+		ft_printf("%d ", array[i]);
 		i++;
 	}
+	ft_printf("\n");
 }
 
 #include <stdio.h>
@@ -77,10 +79,12 @@ int	main(int argc, char *argv[])
 	}
 	check_parsing_create_node(&stack_a, args, is_split);
 	arr = get_int_arr(args, stack_a.size);
+	insertion_sort(arr, stack_a.size);
 	print_array(arr, stack_a.size);
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
 
+	assign_sorted_index(&stack_a, arr);
 	printf("Parsing Success! Size: %d\n", stack_a.size);
 	if (stack_a.top != NULL)
 	{
@@ -88,10 +92,10 @@ int	main(int argc, char *argv[])
 		printf("Stack A: ");
 		while (current->next != stack_a.top)
 		{
-			printf("%d -> ", current->num);
+			printf("%d (%d) -> ", current->num, current->sorted_index);
 			current = current->next;
 		}
-		printf("%d\n", current->num);
+		printf("%d (%d)\n ", current->num, current->sorted_index);
 	}
 	ft_clearstack(&stack_a);
 	free(arr);
