@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/10 01:30:25 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/17 09:10:09 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ void	ft_doubly_lstadd_front(t_stack *stack, t_node *new);
 void	ft_clearstack(t_stack *stack);
 
 //operations
-void	ra(t_stack *stack);
-void	rb(t_stack *stack);
+void	ra(t_stack *stack, int print_rr);
+void	rb(t_stack *stack, int print_rr);
 void	rr(t_stack *stack_a, t_stack *stack_b);
-void	rra(t_stack *stack);
-void	rrb(t_stack *stack);
+void	rra(t_stack *stack, int print_rrr);
+void	rrb(t_stack *stack, int print_rrr);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
-void	sa(t_stack *stack);
-void	sb(t_stack *stack);
+void	sa(t_stack *stack, int print_ss);
+void	sb(t_stack *stack, int print_ss);
 void	ss(t_stack *stack_a, t_stack *stack_b);
 void	pa(t_stack *stack_a, t_stack *stack_b);
 void	pb(t_stack *stack_a, t_stack *stack_b);
+
+//radix and its utils
+int		*get_int_arr(char **args, int stacksize);
 
 //disorder metric
 float	disorder_metrics(t_stack *stack_a);

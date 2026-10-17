@@ -37,6 +37,18 @@ void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
 	}
 }
 
+void	print_array(int *array, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		ft_printf("%d\n", array[i]);
+		i++;
+	}
+}
+
 #include <stdio.h>
 int	main(int argc, char *argv[])
 {
@@ -44,10 +56,13 @@ int	main(int argc, char *argv[])
 	char	**args;
 	int		is_split; //to check "1 2" or 1 2
 	t_node	*current;
+	int		*arr;
 
 	stack_a.top = NULL;
 	stack_a.size = 0;
 	is_split = 0;
+	arr = NULL;
+
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
 		return (0);
 	if (argc == 2)
@@ -61,6 +76,8 @@ int	main(int argc, char *argv[])
 		is_split = 0;
 	}
 	check_parsing_create_node(&stack_a, args, is_split);
+	arr = get_int_arr(args, stack_a.size);
+	print_array(arr, stack_a.size);
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
 
@@ -77,6 +94,7 @@ int	main(int argc, char *argv[])
 		printf("%d\n", current->num);
 	}
 	ft_clearstack(&stack_a);
+	free(arr);
 	return (0);
 }
 
