@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 20:25:01 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/08 17:12:11 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 19:07:31 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h> //dont how how to use ft_printf
 
 void	ra(t_stack *stack)
 {
@@ -40,10 +41,10 @@ void	print_each_node_num(char *str, t_stack stack)
 
 	i = 0;
 	cur = stack.top;
-	ft_printf(str);
+	printf ("%s",str);
 	while (i++ < stack.size)
 	{
-		ft_printf("%d ", cur->num);
+		printf("%d ", cur->num);
 		cur = cur->next;
 	}
 }

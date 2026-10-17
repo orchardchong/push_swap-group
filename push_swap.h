@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/10 01:30:25 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/17 21:58:30 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,19 @@ int		check_duplicate(t_stack *stack_a, int digit);
 
 //to free array & free node
 void	free_array(char **array);
-void	free_and_erase (t_stack *stack_a, char **array, int is_split);
+void	free_and_erase(t_stack *stack_a, char **array, int is_split);
 
 //to check main
 void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split);
 
+//handle correct arguments
+int		is_sorted(t_stack *stack_a);
+
+//handle 3 arguments
+int		sorted_three(t_stack *stack_a);
+
+//simple algorithm
+t_node	*get_min_node(t_stack *stack_a);
+void	simple(t_stack *stack_a, t_stack *stack_b);
+//void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
 #endif 

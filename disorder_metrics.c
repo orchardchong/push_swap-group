@@ -19,11 +19,11 @@ float	disorder_metrics(t_stack *stack_a)
 	float	mistakes;
 	float	total_pairs;
 
-	if (stack_a == NULL || stack_a->top == NULL || stack_a->top->next == stack_a->top)
+	if (stack_a == NULL || stack_a->top == NULL
+		|| stack_a->top->next == stack_a->top)
 		return (0.0);
 	mistakes = 0;
 	total_pairs = 0;
-
 	current = stack_a->top;
 	while (current->next != stack_a->top)
 	{

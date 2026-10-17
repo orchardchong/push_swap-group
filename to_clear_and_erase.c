@@ -19,7 +19,7 @@ void	free_array(char **array) //this is to free ./a.out "1 2 3 a"
 
 	i = 0;
 	if (!array)
-		return;
+		return ;
 	while (array[i])
 	{
 		free(array[i]);
@@ -27,8 +27,10 @@ void	free_array(char **array) //this is to free ./a.out "1 2 3 a"
 	}
 	free(array);
 }
-//is_split (1) meaning yes, it is created by ft_split "1 2 3", if no means:1 2 3 (created by argv)
-void	free_and_erase (t_stack *stack_a, char **array, int is_split)
+
+//is_split (1) meaning yes, it is created by 
+// ft_split "1 2 3", if no means:1 2 3 (created by argv)
+void	free_and_erase(t_stack *stack_a, char **array, int is_split)
 {
 	if (stack_a != NULL && stack_a->top != NULL)
 		ft_clearstack(stack_a);

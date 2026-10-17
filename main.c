@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
 {
@@ -37,19 +38,45 @@ void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
 	}
 }
 
-#include <stdio.h>
+void	print_stack_confirm(t_stack *stack)
+{
+	t_node	*current;
+
+	if (stack == NULL || stack->top == NULL)
+		return ;
+	current = stack->top;
+	printf("Stack A: ");
+	while (current->next != stack->top)
+	{
+		printf("%d -> ", current->num);
+		current = current->next;
+	}
+	printf("%d\n", current->num);
+}
+
+
 int	main(int argc, char *argv[])
 {
 	t_stack	stack_a;
+	t_stack	stack_b;
+	int		strategy;
 	char	**args;
 	int		is_split; //to check "1 2" or 1 2
-	t_node	*current;
 
 	stack_a.top = NULL;
 	stack_a.size = 0;
+	stack_b.top = NULL;
+	stack_b.size = 0;
 	is_split = 0;
+	strategy = 0;
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
 		return (0);
+	if (ft_strncmp(argv[1], "--simple", 9) == 0) //==0 meaning perfectly match
+	{
+		strategy = 1;
+		argv++; //skip the ./a.out
+		argc--; //remove the ./a.out so the total arguments will minus 1
+	}
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' '); //check ./a.out "1 2 3"
@@ -63,23 +90,20 @@ int	main(int argc, char *argv[])
 	check_parsing_create_node(&stack_a, args, is_split);
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
-
-	printf("Parsing Success! Size: %d\n", stack_a.size);
-	if (stack_a.top != NULL)
+	if (is_sorted(&stack_a) == 1)
 	{
-		current = stack_a.top;
-		printf("Stack A: ");
-		while (current->next != stack_a.top)
-		{
-			printf("%d -> ", current->num);
-			current = current->next;
-		}
-		printf("%d\n", current->num);
+		ft_clearstack(&stack_a);
+		return (0);
 	}
+	if (strategy == 1)
+		simple(&stack_a, &stack_b);
+	/*else
+		adaptive_sort(stack_a, stack_b);*/
+	printf("Parsing Success! Size: %d\n", stack_a.size);
+	print_stack_confirm(&stack_a);
 	ft_clearstack(&stack_a);
 	return (0);
 }
-
 
 /*#include <stdio.h>
 int	main(void)
