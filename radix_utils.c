@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 08:17:19 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 10:49:28 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/17 11:45:10 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,62 @@ void	assign_sorted_index(t_stack *stack, int *sorted_array)
 		curr = curr->next;
 		i++;
 	}
+}
+
+/*
+can use max /= 2 also. In this case, shift every bits until
+max becomes 0.
+
+handles +ve values only because sorted_indexes have no -ve
+*/
+int	get_max_num_bits_count(int max)
+{
+	int	count;
+
+	count = 0;
+	while (max)
+	{
+		count++;
+		max >>= 1;
+	}
+	return (count);
+}
+
+/*
+NOTE: bit_post should be max_bit_count - 1 at start
+Count how many 0s or 1s at the specific bit location. To stop early
+when all the 0s or 1s are found, saving ops count and some processing power.
+
+Bit loocation:
+pos 0 1 2
+----------
+	0 0 1
+	0 0 0
+	0 1 0
+at pos 0, 3 0s
+at pos 1, 2 0s 1 1s
+
+Saving ops count for [1 0 1 1]:
+WITH count (zeros = 1)         WITHOUT count (loop all 4)
+ra   (1 → bottom)              ra
+pb   (0 pushed, STOP)          pb
+rra  (undo 1 rotation)         ra   ← wasted
+                               ra   ← wasted
+                      		   rra ×3 (undo all 3 rotations)
+= 3 ops                        = 7 ops
+*/
+int	count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit)
+{
+	t_node *curr;
+	int		count;
+
+	count = 0;
+	curr = stack->top;
+	while (stacksize--)
+	{
+		if ((curr->sorted_index >> bit_pos & 1) == bit)
+			count++;
+		curr = curr->next;
+	}
+	return (count);
 }

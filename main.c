@@ -59,6 +59,7 @@ int	main(int argc, char *argv[])
 	int		is_split; //to check "1 2" or 1 2
 	t_node	*current;
 	int		*arr;
+	int		bit_pos;
 
 	stack_a.top = NULL;
 	stack_a.size = 0;
@@ -80,11 +81,12 @@ int	main(int argc, char *argv[])
 	check_parsing_create_node(&stack_a, args, is_split);
 	arr = get_int_arr(args, stack_a.size);
 	insertion_sort(arr, stack_a.size);
+	bit_pos = get_max_num_bits_count(arr[stack_a.size - 1]) - 1;
 	print_array(arr, stack_a.size);
+	assign_sorted_index(&stack_a, arr);
+
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
-
-	assign_sorted_index(&stack_a, arr);
 	printf("Parsing Success! Size: %d\n", stack_a.size);
 	if (stack_a.top != NULL)
 	{
@@ -97,6 +99,7 @@ int	main(int argc, char *argv[])
 		}
 		printf("%d (%d)\n ", current->num, current->sorted_index);
 	}
+	ft_printf("Max bit count: %d \n", max_bit_count);
 	ft_clearstack(&stack_a);
 	free(arr);
 	return (0);
