@@ -1,32 +1,33 @@
-NAME = libftprintf.a
+NAME = push_swap.a
 CFLAGS = -Wall -Wextra -Werror
-FUNCS	= ft_printf \
-		  ft_convert_c \
-		  ft_convert_s \
-		  ft_convert_p \
-		  ft_convert_d_i \
-		  ft_convert_u \
-		  ft_convert_x \
-		  ft_convert_upper_x \
-		  ft_utoa_base
+FUNCS	= disorder_metrics \
+		  main \
+		  parsing \
+		  push \
+		  reverse_rotation \
+		  rotation \
+		  stack \
+		  swap \
+		  to_clear_and_erase
 
-SRCS = $(addprefix ft_printf/, $(FUNCS:=.c))
+SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-# -C run the make command in libft to create libft.a
-# rename libft.a -> libftprintf.a
-# recompile and update libftprintf.a with ftprintf's .o files
+# -C run the make command in ft_printf
+# rename libftprintf.a -> push_swap.a
+# recompile and update push_swap.a with push_swap's .o files
+# location of headers is not stored in .a
 $(NAME): $(OBJS)
-	make -C ./libft 
-	cp ./libft/libft.a $(NAME) 
+	make -C ./ft_printf 
+	cp ./ft_printf/libftprintf.a $(NAME) 
 	ar rcs $(NAME) $(OBJS) 
 
 # -I finds "libft.h" in sub dir
 # $@ name of object files follow by target names
 # $< is the first prerequisite
-%.o: %.c ft_printf/ft_printf.h
+%.o: %.c
 	cc $(CFLAGS) -c -I ./libft -I ./ft_printf $< -o $@ 
 
 # gdb runs on the compiled program, i.e gdb ./a.out.
@@ -42,10 +43,12 @@ debug:
 
 fclean: clean
 	make fclean -C ./libft
+	make fclean -C ./ft_printf
 	rm -f $(NAME)
 
 clean:
 	make clean -C ./libft
+	make clean -C ./ft_printf
 	rm -f $(OBJS)
 
 re: fclean all
