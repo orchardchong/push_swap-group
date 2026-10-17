@@ -117,7 +117,6 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-/*test*/
 /*#include <stdio.h>
 int	main(void)
 {
