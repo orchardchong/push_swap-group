@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 11:03:34 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 18:31:23 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 07:25:34 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ rra ×2:   A [1 1 X Y]  → sort_a(…, 2) takes the top 2 = 1 1   ✓
 1. After pb, a->size shrinks by zeroes after pb, so stacksize - zeroes
 2. in stack a, if the bit_pos has 0s, pushed to b
 */
-int	split_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
+static int	split_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 {
 	int	i;
 	int	zeroes;
@@ -60,7 +60,7 @@ int	split_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 	return (zeroes);
 }
 
-int	split_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
+static int	split_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 {
 	int	i;
 	int	ones;
@@ -87,12 +87,12 @@ int	split_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 			rrb(b, 0);
 	return (ones);
 }
-void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize);
+static void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize);
 /*
 bit_post should be max_bit_count - 1 at start
 */
 
-void	sort_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
+static void	sort_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 {
 	int	zeroes;
 	int	ones;
@@ -110,7 +110,7 @@ void	sort_a(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 	sort_a(a, b, bit_pos - 1, ones);
 }
 
-void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
+static void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 {
 	int	zeroes;
 	int	ones;
