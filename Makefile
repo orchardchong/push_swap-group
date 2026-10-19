@@ -42,7 +42,7 @@ $(NAME): $(OBJS)
 # of main.c, so machine address is needed to set breakpoint.
 # set the breakpoint at machine code level.
 debug:
-	cc -g $(CFLAGS) -I ./libft -I ./ft_printf $(MAIN) $(NAME)
+	cc -g $(CFLAGS) -I ./libft -I ./ft_printf $(MAIN) $(NAME) -o push_swap
 
 fclean: clean
 	make fclean -C ./libft
