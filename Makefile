@@ -10,7 +10,8 @@ FUNCS	= disorder_metrics \
 		  swap \
 		  to_clear_and_erase \
 		  radix_utils \
-		  radix
+		  radix \
+		  chunk
 
 SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)

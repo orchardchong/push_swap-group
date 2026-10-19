@@ -51,6 +51,24 @@ void	print_array(int *array, int size)
 	ft_printf("\n");
 }
 
+void	print_doubly(t_stack *a)
+{
+	t_node* current;
+
+	ft_printf("Parsing Success! Size: %d\n", a->size);
+	if (a->top != NULL)
+	{
+		current = a->top;
+		ft_printf("Stack A: ");
+		while (current->next != a->top)
+		{
+			ft_printf("%d (%d) -> ", current->num, current->sorted_index);
+			current = current->next;
+		}
+		ft_printf("%d (%d)\n ", current->num, current->sorted_index);
+	}
+}
+
 #include <stdio.h>
 int	main(int argc, char *argv[])
 {
@@ -83,39 +101,18 @@ int	main(int argc, char *argv[])
 	check_parsing_create_node(&stack_a, args, is_split);
 	arr = get_int_arr(args, stack_a.size);
 	insertion_sort(arr, stack_a.size);
-	// print_array(arr, stack_a.size);
 	assign_sorted_index(&stack_a, arr);
 
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
-	// printf("Parsing Success! Size: %d\n", stack_a.size);
-	// if (stack_a.top != NULL)
-	// {
-	// 	current = stack_a.top;
-	// 	printf("Stack A: ");
-	// 	while (current->next != stack_a.top)
-	// 	{
-	// 		printf("%d (%d) -> ", current->num, current->sorted_index);
-	// 		current = current->next;
-	// 	}
-	// 	printf("%d (%d)\n ", current->num, current->sorted_index);
-	// }
-	radix_sort(&stack_a, &stack_b, arr[stack_a.size - 1]);
-	// if (stack_a.top != NULL)
-	// {
-	// 	current = stack_a.top;
-	// 	printf("Stack A: ");
-	// 	while (current->next != stack_a.top)
-	// 	{
-	// 		printf("%d (%d) -> ", current->num, current->sorted_index);
-	// 		current = current->next;
-	// 	}
-	// 	printf("%d (%d)\n ", current->num, current->sorted_index);
-	// }
+	// radix_sort(&stack_a, &stack_b, arr[stack_a.size - 1]);
+	chunk_sort(&stack_a, &stack_b);
+	// print_doubly(&stack_a);
 	ft_clearstack(&stack_a);
 	free(arr);
 	return (0);
 }
+
 /*test*/
 /*#include <stdio.h>
 int	main(void)
