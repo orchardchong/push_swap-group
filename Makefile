@@ -57,6 +57,6 @@ clean:
 re: fclean all
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./a.out
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./push_swap $(ARGS)
 
 .PHONY: all clean fclean re valgrind debug
