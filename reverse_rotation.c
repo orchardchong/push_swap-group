@@ -3,31 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 08:53:38 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/07 08:53:51 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 20:19:39 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_stack *stack)
+void	rra(t_stack *stack, int print_rrr)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> prev;
+	if (!print_rrr)
+	{
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->rra++;
+			bench->total_ops++
+		}
+		ft_printf("rra\n");
+	}
 }
 
-void	rrb(t_stack *stack)
+void	rrb(t_stack *stack, int print_rrr)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> prev;
+	if (!print_rrr)
+	{	
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->rrb++;
+			bench->total_ops++
+		}
+		ft_printf("rrb\n");
+	}
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra(stack_a, 1);
+	rrb(stack_b, 1);
+	if (bench != NULL && bench->active == 1)
+	{
+		bench->rra++;
+		bench->total_ops++
+	}
+	ft_printf("rrr\n");
 }

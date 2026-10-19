@@ -39,13 +39,13 @@ int	sorted_three(t_stack *stack_a) //do i need this?
 	mid = stack_a->top->next->num;
 	bottom = stack_a->top->prev->num;
 	if (top > mid && top > bottom) //312
-		ra(stack_a);
+		ra(stack_a, 0);
 	if (mid > top && mid > bottom) //231
-		rra(stack_a);
+		rra(stack_a, 0);
 	top = stack_a->top->num;
 	mid = stack_a->top->next->num;
 	if (top > mid) //213
-		sa(stack_a);
+		sa(stack_a, 0);
 	return (0);
 }
 

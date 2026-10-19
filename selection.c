@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple.c                                           :+:      :+:    :+:   */
+/*   selection.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,7 +30,7 @@ t_node	*get_min_node(t_stack *stack_a)
 	return (min_node);
 }
 
-void	simple(t_stack *stack_a, t_stack *stack_b)
+void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
 	t_node	*min_node;
 
@@ -38,7 +38,7 @@ void	simple(t_stack *stack_a, t_stack *stack_b)
 	{
 		min_node = get_min_node(stack_a);
 		while (stack_a->top != min_node)
-			ra(stack_a); 
+			ra(stack_a, 0); 
 		pb(stack_a, stack_b);
 	}
 	if (stack_a->size == 3)
@@ -73,7 +73,7 @@ int	main(void)
 	printf("%d ->",current->num);
 	printf("\n");
 	printf("AFTER SORTING\n");
-	simple(&stack_a,&stack_b);
+	selection(&stack_a,&stack_b);
 	printf("\n");
 	if (stack_a.top != NULL)
 	{

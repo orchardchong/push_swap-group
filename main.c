@@ -38,7 +38,21 @@ void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
 	}
 }
 
-void	print_stack_confirm(t_stack *stack)
+void	print_array(int *array, int size)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("arr: ");
+	while (i < size)
+	{
+		ft_printf("%d ", array[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+/*void	print_stack_confirm(t_stack *stack)
 {
 	t_node	*current;
 
@@ -52,16 +66,19 @@ void	print_stack_confirm(t_stack *stack)
 		current = current->next;
 	}
 	printf("%d\n", current->num);
-}
+}*/
 
 
 int	main(int argc, char *argv[])
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	int		strategy;
+	t_bench	bench;
 	char	**args;
 	int		is_split; //to check "1 2" or 1 2
+	int		strategy;
+	int		*arr;
+
 
 	stack_a.top = NULL;
 	stack_a.size = 0;
@@ -69,14 +86,40 @@ int	main(int argc, char *argv[])
 	stack_b.size = 0;
 	is_split = 0;
 	strategy = 0;
+	arr = NULL;
+	ft_bzero(&bench, sizeof(t_bench));
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
 		return (0);
+	if (ft_strncmp(argv[1], "--bench", 8) == 0)
+	{
+		bench.active = 1;
+		argv++;
+		argc--;
+	}
 	if (ft_strncmp(argv[1], "--simple", 9) == 0) //==0 meaning perfectly match
 	{
 		strategy = 1;
 		argv++; //skip the ./a.out
 		argc--; //remove the ./a.out so the total arguments will minus 1
 	}
+	/*else if (ft_strncmp(argv[1], "--medium", 9)== 0)
+	{
+		strategy = 2;
+		argv++;
+		argc--;
+	}*/
+	else if (ft_strncmp(argv[1], "--complex", 10) == 0)
+	{
+		strategy = 3;
+		argv++;
+		argc--;
+	}
+	/*else if (ft_strncmp(argv[1], "--adaptive", 11)== 0)
+	{
+		strategy = 0;
+		argv++;
+		argc--;
+	}*/
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' '); //check ./a.out "1 2 3"
@@ -88,22 +131,33 @@ int	main(int argc, char *argv[])
 		is_split = 0;
 	}
 	check_parsing_create_node(&stack_a, args, is_split);
+	arr = get_int_arr(args, stack_a.size);
+	insertion_sort(arr, stack_a.size);
+	assign_sorted_index(&stack_a, arr);
+
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
+
 	if (is_sorted(&stack_a) == 1)
 	{
 		ft_clearstack(&stack_a);
+		free(arr);
 		return (0);
 	}
 	if (strategy == 1)
-		simple(&stack_a, &stack_b);
-	/*else
-		adaptive_sort(stack_a, stack_b);*/
-	printf("Parsing Success! Size: %d\n", stack_a.size);
-	print_stack_confirm(&stack_a);
+		selection(&stack_a, &stack_b, &bench);
+	//else if (strategy == 2)
+		//medium (&stack_a, &stack_b);
+	else if (strategy == 3)
+		radix_sort(&stack_a, &stack_b, arr[stack_a.size - 1], &bench);
+	else
+		adaptive_sort(&stack_a, &stack_b, &bench);
+	print_benchmark(&bench);
 	ft_clearstack(&stack_a);
+	free(arr);
 	return (0);
 }
+
 
 /*#include <stdio.h>
 int	main(void)

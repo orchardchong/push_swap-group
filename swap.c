@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 09:25:46 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/08 17:13:10 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 20:20:13 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 AWARE: make sure not pointer is pointing to any of the first 2 nodes, else
 might have unexpected behaviour as the tracked node will have changed values.
 */
-void	sa(t_stack *stack)
+void	sa(t_stack *stack, int print_ss)
 {
 	int	num;
 	int	sorted_index;
@@ -29,9 +29,18 @@ void	sa(t_stack *stack)
 	stack->top->sorted_index = stack->top->next->sorted_index;
 	stack->top->next->num = num;
 	stack->top->next->sorted_index = sorted_index;
+	if (!print_ss)
+	{
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->sa++;
+			bench->total_ops++
+		}
+		ft_printf("sa\n");
+	}
 }
 
-void	sb(t_stack *stack)
+void	sb(t_stack *stack, int print_ss)
 {
 	int	num;
 	int	sorted_index;
@@ -44,12 +53,27 @@ void	sb(t_stack *stack)
 	stack->top->sorted_index = stack->top->next->sorted_index;
 	stack->top->next->num = num;
 	stack->top->next->sorted_index = sorted_index;
+	if (!print_ss)
+	{
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->sb++;
+			bench->total_ops++
+		}
+		ft_printf("sb\n");
+	}
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	sa(stack_a, 1);
+	sb(stack_b, 1);
+	if (bench != NULL && bench->active == 1)
+		{
+			bench->ss++;
+			bench->total_ops++
+		}
+	ft_printf("ss\n");
 }
 
 // #include <stdio.h>

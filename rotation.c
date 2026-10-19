@@ -6,48 +6,72 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 20:25:01 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/17 19:07:31 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/19 20:24:38 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "push_swap.h"
-#include <stdio.h> //dont how how to use ft_printf
 
-void	ra(t_stack *stack)
+void	ra(t_stack *stack, int print_rr, t_bench bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> next;
+	if (!print_rr)
+	{
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->ra++;
+			bench->total_ops++
+		}
+		ft_printf("ra\n");
+	}
 }
 
-void	rb(t_stack *stack)
+void	rb(t_stack *stack, int print_rr, t_bench bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
 	stack -> top = stack -> top -> next;
+	if (!print_rr)
+	{
+		if (bench != NULL && bench->active == 1)
+		{
+			bench->rb++;
+			bench->total_ops++
+		}
+		ft_printf("rb\n");
+	}
 }
 
-void	rr(t_stack *stack_a, t_stack *stack_b)
+void	rr(t_stack *stack_a, t_stack *stack_b, t_bench bench)
 {
-	ra(stack_a);
-	rb(stack_b);
+	ra(stack_a, 1,bench);
+	rb(stack_b, 1,bench);
+	if (bench != NULL && bench->active == 1)
+	{
+		bench->rr++;
+		bench->total_ops++
+	}
+	ft_printf("rr\n");
 }
 
 // Share with reverse_rotation.c
-void	print_each_node_num(char *str, t_stack stack)
-{
-	int		i;
-	t_node	*cur;
+// void	print_each_node_num(char *str, t_stack stack)
+// {
+// 	int		i;
+// 	t_node	*cur;
 
-	i = 0;
-	cur = stack.top;
-	printf ("%s",str);
-	while (i++ < stack.size)
-	{
-		printf("%d ", cur->num);
-		cur = cur->next;
-	}
-}
+// 	i = 0;
+// 	cur = stack.top;
+// 	ft_printf(str);
+// 	while (i++ < stack.size)
+// 	{
+// 		ft_printf("%d ", cur->num);
+// 		cur = cur->next;
+// 	}
+// }
 
 // int	main(void)
 // {

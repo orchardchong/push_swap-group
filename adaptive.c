@@ -12,15 +12,15 @@
 
 /*#include "push_swap.h"
 
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
 	float	disorder;
 
 	disorder = disorder_metrics(stack_a);
 	if (disorder < 0.2)
-		simple(stack_a, stack_b);
-	else if (disorder >= 0.2 || disorder < 0.5)
-		medium (stack_a, stack_b);
+		selection(stack_a, stack_b);
+	else if (disorder >= 0.2 && disorder < 0.5)
+		medium(stack_a, stack_b);
 	else if (disorder >= 0.5)
-		complex (stack_a, stack_b);
+		radix_sort(stack_a, stack_b);
 }*/

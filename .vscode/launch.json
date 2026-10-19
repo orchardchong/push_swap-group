@@ -23,7 +23,7 @@ GDB runs ./a.out
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/a.out",
-            "args": [],
+            "args": ["5 2 7 1 4 3"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "externalConsole": false,

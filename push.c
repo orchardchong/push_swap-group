@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 21:34:00 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/08 16:32:36 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 20:21:32 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 		stack_b->top = stack_b->top->next;
 	}
 	ft_doubly_lstadd_front(stack_a, b_top);
+	if (bench != NULL && bench->active == 1)
+	{
+		bench->pa++;
+		bench->total_ops++;
+	}
+	ft_printf("pa\n");
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
@@ -57,6 +63,12 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 		stack_a->top = stack_a->top->next;
 	}
 	ft_doubly_lstadd_front(stack_b, a_top);
+	if (bench != NULL && bench->active == 1)
+	{
+		bench->pb++;
+		bench->total_ops++;
+	}
+	ft_printf("pb\n");
 }
 
 // void	fill_arr(t_stack *stack, int *arr, int arrsize)
