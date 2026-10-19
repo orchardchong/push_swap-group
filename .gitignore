@@ -6,3 +6,5 @@ test.c
 *.txt
 checker_linux
 Push-Swap-Tester-master
+push_swap_visualizer
+.vscode/settings.json

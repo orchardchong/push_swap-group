@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 08:17:19 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 21:32:20 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/20 00:14:55 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	assign_sorted_index(t_stack *stack, char **args)
 	int		i;
 	int		j;
 	int		*sorted_array;
-	
+
 	sorted_array = get_int_arr(args, stack->size);
 	insertion_sort(sorted_array, stack->size);
 	i = 0;
