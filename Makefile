@@ -11,9 +11,13 @@ FUNCS	= disorder_metrics \
 		  to_clear_and_erase \
 		  radix_utils \
 		  radix \
+<<<<<<< HEAD
 		  adaptive \
 		  selection \
 		  is_sorted \
+=======
+		  chunk
+>>>>>>> 680898dfe8041dff099c1fe27bf779d5afd44c15
 
 SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)
@@ -44,7 +48,7 @@ $(NAME): $(OBJS)
 # of main.c, so machine address is needed to set breakpoint.
 # set the breakpoint at machine code level.
 debug:
-	cc -g $(CFLAGS) -I ./libft -I ./ft_printf $(MAIN) $(NAME)
+	cc -g $(CFLAGS) -I ./libft -I ./ft_printf $(MAIN) $(NAME) -o push_swap
 
 fclean: clean
 	make fclean -C ./libft

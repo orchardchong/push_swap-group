@@ -19,5 +19,7 @@ void	print_benchmark(t_bench *bench)
 	ft_printf(2,"[bench] disorder: %d%\n", bench->disorder *100);
 	ft_print(2,"[bench] strategy: ");
 	if (bench->strategy == 0)
-		ft_print (2, "Adaptive / 0 (n )")
-}
+		ft_printf("Adaptive / O(n√n)");
+	if (bench->strategy == 1)
+		ft_printf("Simple O(n)")
+	}

@@ -69,6 +69,25 @@ void	print_array(int *array, int size)
 }*/
 
 
+void	print_doubly(t_stack *a)
+{
+	t_node* current;
+
+	ft_printf("Parsing Success! Size: %d\n", a->size);
+	if (a->top != NULL)
+	{
+		current = a->top;
+		ft_printf("Stack A: ");
+		while (current->next != a->top)
+		{
+			ft_printf("%d (%d) -> ", current->num, current->sorted_index);
+			current = current->next;
+		}
+		ft_printf("%d (%d)\n ", current->num, current->sorted_index);
+	}
+}
+
+#include <stdio.h>
 int	main(int argc, char *argv[])
 {
 	t_stack	stack_a;
@@ -94,7 +113,7 @@ int	main(int argc, char *argv[])
 	{
 		bench.active = 1;
 		argv++;
-		argc--;
+		argc--; 
 	}
 	if (ft_strncmp(argv[1], "--simple", 9) == 0) //==0 meaning perfectly match
 	{
@@ -102,24 +121,24 @@ int	main(int argc, char *argv[])
 		argv++; //skip the ./a.out
 		argc--; //remove the ./a.out so the total arguments will minus 1
 	}
-	/*else if (ft_strncmp(argv[1], "--medium", 9)== 0)
+	else if (ft_strncmp(argv[1], "--medium", 9)== 0)
 	{
 		strategy = 2;
 		argv++;
 		argc--;
-	}*/
+	}
 	else if (ft_strncmp(argv[1], "--complex", 10) == 0)
 	{
 		strategy = 3;
 		argv++;
 		argc--;
 	}
-	/*else if (ft_strncmp(argv[1], "--adaptive", 11)== 0)
+	else if (ft_strncmp(argv[1], "--adaptive", 11)== 0)
 	{
 		strategy = 0;
 		argv++;
 		argc--;
-	}*/
+	}
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' '); //check ./a.out "1 2 3"
@@ -146,19 +165,21 @@ int	main(int argc, char *argv[])
 	}
 	if (strategy == 1)
 		selection(&stack_a, &stack_b, &bench);
-	//else if (strategy == 2)
-		//medium (&stack_a, &stack_b);
+	else if (strategy == 2)
+		chunk_sort(&stack_a, &stack_b, &bench);
 	else if (strategy == 3)
 		radix_sort(&stack_a, &stack_b, arr[stack_a.size - 1], &bench);
 	else
 		adaptive_sort(&stack_a, &stack_b, &bench);
 	print_benchmark(&bench);
+	// print_doubly(&stack_a);
 	ft_clearstack(&stack_a);
 	free(arr);
 	return (0);
 }
 
 
+/*test*/
 /*#include <stdio.h>
 int	main(void)
 {

@@ -1,6 +1,8 @@
 *.a
 *.out
+push_swap
 test.c
 .normignore
 *.txt
 checker_linux
+Push-Swap-Tester-master

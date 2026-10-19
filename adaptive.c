@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "push_swap.h"
+#include "push_swap.h"
 
 void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
@@ -23,4 +23,4 @@ void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 		medium(stack_a, stack_b);
 	else if (disorder >= 0.5)
 		radix_sort(stack_a, stack_b);
-}*/
+}

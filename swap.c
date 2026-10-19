@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 09:25:46 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 20:20:13 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/19 22:24:02 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 AWARE: make sure not pointer is pointing to any of the first 2 nodes, else
 might have unexpected behaviour as the tracked node will have changed values.
 */
-void	sa(t_stack *stack, int print_ss)
+void	sa(t_stack *stack, int print_ss, t_bench bench)
 {
 	int	num;
 	int	sorted_index;
@@ -40,7 +40,7 @@ void	sa(t_stack *stack, int print_ss)
 	}
 }
 
-void	sb(t_stack *stack, int print_ss)
+void	sb(t_stack *stack, int print_ss, t_bench bench)
 {
 	int	num;
 	int	sorted_index;
@@ -64,7 +64,7 @@ void	sb(t_stack *stack, int print_ss)
 	}
 }
 
-void	ss(t_stack *stack_a, t_stack *stack_b)
+void	ss(t_stack *stack_a, t_stack *stack_b, t_bench bench)
 {
 	sa(stack_a, 1);
 	sb(stack_b, 1);
