@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 20:25:01 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 20:24:38 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 00:21:01 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ra(t_stack *stack, int print_rr, t_bench bench)
 		}
 		ft_printf("ra\n");
 	}
-}
+}  
 
 void	rb(t_stack *stack, int print_rr, t_bench bench)
 {

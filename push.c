@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 21:34:00 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 20:21:32 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 00:37:31 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ example for its initialization:
 	t_stack *stack_a = NULL; OR
 	t_stack stack_a;
 */
-void	pa(t_stack *stack_a, t_stack *stack_b)
+void	pa(t_stack *stack_a, t_stack *stack_b, t_bench bench)
 {
 	t_node	*b_top;
 
@@ -46,7 +46,7 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 	ft_printf("pa\n");
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+void	pb(t_stack *stack_a, t_stack *stack_b, t_bench bench)
 {
 	t_node	*a_top;
 

@@ -100,5 +100,7 @@ int		sorted_three(t_stack *stack_a);
 //simple algorithm
 t_node	*get_min_node(t_stack *stack_a);
 void	selection(t_stack *stack_a, t_stack *stack_b);
-//void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
+
+//adaptive algorithm
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
 #endif 
