@@ -6,15 +6,15 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 11:03:34 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 07:25:34 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 21:20:27 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-has_other_group is needed to make sure the current stack is always on top
-before next sort.
+stacksize - zeroes < a->size is needed to make sure the current stack 
+is always on top before next sort.
 
 Example:
 A (top first):  [1 0 1 0 | X Y]     group size 4, X Y = other group below
@@ -123,9 +123,10 @@ static void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize)
 	sort_a(a, b, bit_pos - 1, ones);
 }
 
-void	radix_sort(t_stack *a, t_stack *b, int max)
+void	radix_sort(t_stack *a, t_stack *b, char **args)
 {
-	sort_a(a, b, get_max_num_bits_count(max), a->size);
+	assign_sorted_index(a, args);
+	sort_a(a, b, get_max_num_bits_count(a->size), a->size);
 	while (b->size)
 		pa(a, b);
 }

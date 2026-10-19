@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 06:41:09 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 08:37:04 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 22:15:23 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ static void	push_max_to_a(t_stack *a, t_stack *b)
 chunk_start_i + chunk_size is always bigger.
 
 */
-void	chunk_sort(t_stack *a, t_stack *b)
+void	chunk_sort(t_stack *a, t_stack *b, char **args)
 {
 	int	chunk_start_i;
 	int	chunk_size;
 
+	assign_sorted_index(a, args);
 	chunk_start_i = 0;
 	chunk_size = get_chunk_size(a->size);
 	while (a->size)

@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 08:38:07 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 21:32:59 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	pa(t_stack *stack_a, t_stack *stack_b);
 void	pb(t_stack *stack_a, t_stack *stack_b);
 
 //radix and its utils
-void	radix_sort(t_stack *a, t_stack *b, int max);
-int		*get_int_arr(char **args, int size);
-void	insertion_sort(int *arr, int size);
-void	assign_sorted_index(t_stack *stack, int *sorted_array);
+void	radix_sort(t_stack *a, t_stack *b, char **args);
 int		get_max_num_bits_count(int max);
 int		count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit);
 
 //chunk sort
-void	chunk_sort(t_stack *a, t_stack *b);
+void	chunk_sort(t_stack *a, t_stack *b, char **args);
+
+// radix and chunk sort common utils
+void	assign_sorted_index(t_stack *stack, char **args);
 
 //disorder metric
 float	disorder_metrics(t_stack *stack_a);

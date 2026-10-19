@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 08:17:19 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 08:36:43 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/19 21:32:20 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // free!
 // this should be used after input validation to make sure values within INT
 // range
-int	*get_int_arr(char **args, int size)
+static int	*get_int_arr(char **args, int size)
 {
 	int	*arr;
 	int	i;
@@ -53,7 +53,7 @@ int	*get_int_arr(char **args, int size)
 not using int **arr, as we only wants to modify the values,
 not the address
 */
-void	insertion_sort(int *arr, int size)
+static void	insertion_sort(int *arr, int size)
 {
 	int	i;
 	int	j;
@@ -74,12 +74,15 @@ void	insertion_sort(int *arr, int size)
 	}
 }
 
-void	assign_sorted_index(t_stack *stack, int *sorted_array)
+void	assign_sorted_index(t_stack *stack, char **args)
 {
 	t_node	*curr;
 	int		i;
 	int		j;
-
+	int		*sorted_array;
+	
+	sorted_array = get_int_arr(args, stack->size);
+	insertion_sort(sorted_array, stack->size);
 	i = 0;
 	curr = stack->top;
 	while (i < stack->size)
@@ -94,6 +97,7 @@ void	assign_sorted_index(t_stack *stack, int *sorted_array)
 		curr = curr->next;
 		i++;
 	}
+	free(sorted_array);
 }
 
 /*
