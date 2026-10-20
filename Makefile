@@ -1,4 +1,5 @@
-NAME = push_swap.a
+NAME = push_swap
+LIBFTPRINTF = ./ft_printf/libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 FUNCS	= disorder_metrics \
 		  main \
@@ -24,20 +25,18 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-# -C run the make command in ft_printf
-# rename libftprintf.a -> push_swap.a
-# recompile and update push_swap.a with push_swap's .o files
-# location of headers is not stored in .a
-$(NAME): $(OBJS)
-	make -C ./ft_printf 
-	cp ./ft_printf/libftprintf.a $(NAME) 
-	ar rcs $(NAME) $(OBJS) 
+# during linking ,-I flag is no needed.
+# when *.c has changes, object files will be recompiled using -I. 
+# Only compiles the updated *.c files
 
-# -I finds "libft.h" in sub dir
-# $@ name of object files follow by target names
-# $< is the first prerequisite
-%.o: %.c
-	cc $(CFLAGS) -c -I ./libft -I ./ft_printf $< -o $@ 
+# Compiling *.o files with -g will be ignored by cc,
+# the debug info such as line number is in *.c,
+# -g during compiliation then will store the info in *.o
+$(NAME): $(OBJS) $(LIBFTPRINTF)
+	cc $(CFLAGS) $(OBJS) $(LIBFTPRINTF) -o $(NAME)
+
+$(LIBFTPRINTF):
+	make -C ./ft_printf 
 
 # gdb runs on the compiled program, i.e gdb ./a.out.
 # if a.out is not compiled with -g, then mapping of
@@ -47,16 +46,18 @@ $(NAME): $(OBJS)
 # Without -g, gdb cannot recognize 0x40112a as line 4 
 # of main.c, so machine address is needed to set breakpoint.
 # set the breakpoint at machine code level.
-debug:
-	cc -g $(CFLAGS) -I ./libft -I ./ft_printf $(MAIN) $(NAME) -o push_swap
+
+# push_swap.h included ft_printf.h, ft_printf.h included
+# libft.h, so need to tell compiler where to find them using
+# -I
+%.o: %.c push_swap.h
+	cc $(CFLAGS) -c -g -I ./libft -I ./ft_printf $< -o $@ 
 
 fclean: clean
-	make fclean -C ./libft
 	make fclean -C ./ft_printf
 	rm -f $(NAME)
 
 clean:
-	make clean -C ./libft
 	make clean -C ./ft_printf
 	rm -f $(OBJS)
 
@@ -65,4 +66,4 @@ re: fclean all
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./push_swap $(ARGS)
 
-.PHONY: all clean fclean re valgrind debug
+.PHONY: all clean fclean re valgrind

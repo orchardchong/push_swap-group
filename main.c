@@ -160,8 +160,8 @@ int	main(int argc, char *argv[])
 		is_split = 0;
 	}
 	check_parsing_create_node(&stack_a, args, is_split);
-	radix_sort(&stack_a, &stack_b, args);
-	// chunk_sort(&stack_a, &stack_b, args);
+	// radix_sort(&stack_a, &stack_b, args);
+	chunk_sort(&stack_a, &stack_b, args);
 	// print_doubly(&stack_a);
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
