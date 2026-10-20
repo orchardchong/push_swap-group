@@ -22,7 +22,7 @@ GDB runs ./a.out
             "name": "(gdb) Debug rotations",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
+            "program": "${workspaceFolder}/push_swap",
             "args": ["5 2 7 1 4 3"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -31,4 +31,4 @@ void	print_benchmark(t_bench *bench)
 			bench->sa, bench->sb, bench->ss, bench->pa, bench->pb);
 	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
 			bench->ra, bench->rb, bench->rr, bench->rra, bench->rrb, bench->rrr);
-	}
+}

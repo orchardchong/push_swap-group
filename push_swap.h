@@ -6,11 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/10/19 00:55:01 by ochong           ###   ########.fr       */
-=======
-/*   Updated: 2026/10/19 08:38:07 by junlim           ###   ########.fr       */
->>>>>>> 680898dfe8041dff099c1fe27bf779d5afd44c15
+/*   Updated: 2026/10/20 19:58:30 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +62,15 @@ void	pa(t_stack *stack_a, t_stack *stack_b);
 void	pb(t_stack *stack_a, t_stack *stack_b);
 
 //radix and its utils
-void	radix_sort(t_stack *a, t_stack *b, int max);
-int		*get_int_arr(char **args, int size);
-void	insertion_sort(int *arr, int size);
-void	assign_sorted_index(t_stack *stack, int *sorted_array);
+void	radix_sort(t_stack *a, t_stack *b, char **args);
 int		get_max_num_bits_count(int max);
 int		count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit);
 
 //chunk sort
-void	chunk_sort(t_stack *a, t_stack *b);
+void	chunk_sort(t_stack *a, t_stack *b, char **args);
+
+// radix and chunk sort common utils
+void	assign_sorted_index(t_stack *stack, char **args);
 
 //disorder metric
 float	disorder_metrics(t_stack *stack_a);
@@ -102,5 +98,5 @@ t_node	*get_min_node(t_stack *stack_a);
 void	selection(t_stack *stack_a, t_stack *stack_b);
 
 //adaptive algorithm
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args, t_bench *bench);
 #endif 

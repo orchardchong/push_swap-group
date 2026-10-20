@@ -95,8 +95,13 @@ int	main(int argc, char *argv[])
 	t_bench	bench;
 	char	**args;
 	int		is_split; //to check "1 2" or 1 2
+<<<<<<< HEAD
 	int		strategy;
 	int		*arr;
+=======
+	// t_node	*current;
+	
+>>>>>>> b23036f1b49ca0b665ae1b0a92db5fa68bdabc8c
 
 
 	stack_a.top = NULL;
@@ -104,9 +109,14 @@ int	main(int argc, char *argv[])
 	stack_b.top = NULL;
 	stack_b.size = 0;
 	is_split = 0;
+<<<<<<< HEAD
 	strategy = 0;
 	arr = NULL;
 	ft_bzero(&bench, sizeof(t_bench));
+=======
+	
+
+>>>>>>> b23036f1b49ca0b665ae1b0a92db5fa68bdabc8c
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
 		return (0);
 	if (ft_strncmp(argv[1], "--bench", 8) == 0)
@@ -150,12 +160,12 @@ int	main(int argc, char *argv[])
 		is_split = 0;
 	}
 	check_parsing_create_node(&stack_a, args, is_split);
-	arr = get_int_arr(args, stack_a.size);
-	insertion_sort(arr, stack_a.size);
-	assign_sorted_index(&stack_a, arr);
-
+	radix_sort(&stack_a, &stack_b, args);
+	// chunk_sort(&stack_a, &stack_b, args);
+	// print_doubly(&stack_a);
 	if (is_split == 1) //If parsing succeeds, clean up ft_split here safely
 		free_array(args);
+<<<<<<< HEAD
 
 	if (is_sorted(&stack_a) == 1)
 	{
@@ -173,8 +183,9 @@ int	main(int argc, char *argv[])
 		adaptive_sort(&stack_a, &stack_b, &bench);
 	print_benchmark(&bench);
 	// print_doubly(&stack_a);
+=======
+>>>>>>> b23036f1b49ca0b665ae1b0a92db5fa68bdabc8c
 	ft_clearstack(&stack_a);
-	free(arr);
 	return (0);
 }
 
