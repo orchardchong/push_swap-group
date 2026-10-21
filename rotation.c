@@ -6,10 +6,9 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 20:25:01 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 20:04:41 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/21 20:37:31 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
@@ -27,7 +26,7 @@ void	ra(t_stack *stack, int print_rr, t_bench *bench)
 		}
 		ft_printf("ra\n");
 	}
-}  
+}
 
 void	rb(t_stack *stack, int print_rr, t_bench *bench)
 {
@@ -47,8 +46,8 @@ void	rb(t_stack *stack, int print_rr, t_bench *bench)
 
 void	rr(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
-	ra(stack_a, 1,bench);
-	rb(stack_b, 1,bench);
+	ra(stack_a, 1, bench);
+	rb(stack_b, 1, bench);
 	if (bench != NULL && bench->active == 1)
 	{
 		bench->rr++;

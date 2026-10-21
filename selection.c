@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   selection.c                                           :+:      :+:    :+:   */
+/*   selection.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 22:47:18 by ochong            #+#    #+#             */
-/*   Updated: 2026/10/12 22:47:18 by ochong           ###   ########.fr       */
+/*   Created: 2026/10/21 20:38:00 by ochong            #+#    #+#             */
+/*   Updated: 2026/10/21 20:38:00 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 	{
 		min_node = get_min_node(stack_a);
 		while (stack_a->top != min_node)
-			ra(stack_a, 0, bench); 
+			ra(stack_a, 0, bench);
 		pb(stack_a, stack_b, bench);
 	}
 	if (stack_a->size == 3)

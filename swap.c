@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 09:25:46 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 20:06:29 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/21 20:39:07 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ void	ss(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 	sa(stack_a, 1, bench);
 	sb(stack_b, 1, bench);
 	if (bench != NULL && bench->active == 1)
-		{
-			bench->ss++;
-			bench->total_ops++;
-		}
+	{
+		bench->ss++;
+		bench->total_ops++;
+	}
 	ft_printf("ss\n");
 }
 

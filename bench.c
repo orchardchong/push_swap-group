@@ -12,8 +12,9 @@
 
 #include "push_swap.h"
 
-static void print_bench_ops(t_bench *bench)
+static void	print_bench_ops(t_bench *bench)
 {
+	ft_putstr_fd("\n", 2);
 	ft_putstr_fd("[bench] sa: ", 2);
 	ft_putnbr_fd(bench->sa, 2);
 	ft_putstr_fd(" sb: ", 2);
@@ -45,7 +46,7 @@ void	print_benchmark(t_bench *bench)
 	int	decimal;
 
 	if (bench == NULL || bench->active == 0)
-		return;
+		return ;
 	front_digit = (int)(bench->disorder * 100);
 	decimal = (int)(bench->disorder * 10000) % 100;
 	ft_putstr_fd("[bench] disorder: ", 2);
@@ -54,8 +55,7 @@ void	print_benchmark(t_bench *bench)
 	if (decimal < 10)
 		ft_putstr_fd("0", 2);
 	ft_putnbr_fd(decimal, 2);
-	ft_putstr_fd("%\n", 2);
-	ft_putstr_fd("[bench] strategy: ", 2);
+	ft_putstr_fd("%\n[bench] strategy: ", 2);
 	if (bench->strategy == 0)
 		ft_putstr_fd("Adaptive / Auto\n", 2);
 	else if (bench->strategy == 1)
@@ -66,7 +66,6 @@ void	print_benchmark(t_bench *bench)
 		ft_putstr_fd("Complex O(n log n)\n", 2);
 	ft_putstr_fd("[bench] total_ops: ", 2);
 	ft_putnbr_fd(bench->total_ops, 2);
-	ft_putstr_fd("\n", 2);
 	print_bench_ops(bench);
 }
 
@@ -83,7 +82,7 @@ void	print_benchmark(t_bench *bench)
 	bench.sa = 100; bench.sb = 10; bench.ss = 100;
 	bench.pa = 100; bench.pb = 100;
 	bench.ra = 300; bench.rb = 200; bench.rr = 100;
-	bench.rra = 200; bench.rrb = 712; bench.rrr = 999;
+	bench.rra = 200; bench.rrb = 712; bench.rrr = 998;
 
 	print_benchmark(&bench);
 

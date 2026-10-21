@@ -13,6 +13,8 @@
 #include "push_swap.h"
 
 //check is it a real number
+//how should it handle "- 2"? ft_split will handle
+
 int	is_num(char *str)
 {
 	int	i;
@@ -20,7 +22,7 @@ int	is_num(char *str)
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	if (str[i] == '\0') //how should it handle "- 2"? ft_split will handle
+	if (str[i] == '\0')
 		return (0);
 	while (str[i])
 	{
@@ -33,6 +35,7 @@ int	is_num(char *str)
 }
 
 //using long just to handle overflow or underflow like 999999999999
+
 long	ft_atol(const char *str)
 {
 	int		i;
@@ -58,7 +61,9 @@ long	ft_atol(const char *str)
 	return (num * symbol);
 }
 
-//each num only can show up once '0' means no duplicates, '1' means yes, there is a duplicate
+//each num only can show up once '0' means no duplicates,
+//'1' means yes, there is a duplicate
+
 int	check_duplicate(t_stack *stack_a, int digit)
 {
 	t_node	*current;
@@ -109,8 +114,11 @@ int main(void)
 	stack_a.size = 2;
 
 	printf("Stack currently contains: [1, 2]\n");
-	printf("Checking for 1 -> %d (Expected: 1 - Duplicate found)\n", check_duplicate(&stack_a, 1));
-	printf("Checking for 2 -> %d (Expected: 1 - Duplicate found)\n", check_duplicate(&stack_a, 2));
-	printf("Checking for 6 -> %d (Expected: 0 - Safe to add)\n", check_duplicate(&stack_a, 6));
+	printf("Checking for 1 -> %d (Expected: 1 - 
+		Duplicate found)\n", check_duplicate(&stack_a, 1));
+	printf("Checking for 2 -> %d (Expected: 1 -
+		 Duplicate found)\n", check_duplicate(&stack_a, 2));
+	printf("Checking for 6 -> %d (Expected: 0 - 
+		Safe to add)\n", check_duplicate(&stack_a, 6));
 	return (0);
 }*/

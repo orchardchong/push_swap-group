@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// to check is it already sorted? 1 2 3
+//if the stack is empty or has only 1 number, it's already sorted
+
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack_a)// to check is it already sorted? 1 2 3
+int	is_sorted(t_stack *stack_a)
 {
 	t_node	*current;
 
-	//if the stack is empty or has only 1 number, it's already sorted
 	if (stack_a == NULL || stack_a->top == NULL || stack_a->size == 1)
 		return (1);
 	current = stack_a->top;
@@ -29,6 +31,10 @@ int	is_sorted(t_stack *stack_a)// to check is it already sorted? 1 2 3
 	return (1);
 }
 
+//312
+//231
+//213
+
 int	sorted_three(t_stack *stack_a, t_bench *bench)
 {
 	int	top;
@@ -38,13 +44,13 @@ int	sorted_three(t_stack *stack_a, t_bench *bench)
 	top = stack_a->top->num;
 	mid = stack_a->top->next->num;
 	bottom = stack_a->top->prev->num;
-	if (top > mid && top > bottom) //312
+	if (top > mid && top > bottom)
 		ra(stack_a, 0, bench);
-	else if (mid > top && mid > bottom) //231
+	else if (mid > top && mid > bottom)
 		rra(stack_a, 0, bench);
 	top = stack_a->top->num;
 	mid = stack_a->top->next->num;
-	if (top > mid) //213
+	if (top > mid)
 		sa(stack_a, 0, bench);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 08:53:38 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 20:17:03 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/21 20:36:25 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rrb(t_stack *stack, int print_rrr, t_bench *bench)
 		return ;
 	stack -> top = stack -> top -> prev;
 	if (!print_rrr)
-	{	
+	{
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->rrb++;

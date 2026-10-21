@@ -6,10 +6,9 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 22:34:59 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/21 20:34:55 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -36,10 +35,17 @@ typedef struct s_bench
 	float	disorder;
 	int		strategy;
 	int		total_ops;
-	int		sa, sb, ss;
-	int		pa, pb;
-	int		ra, rb, rr;
-	int		rra, rrb, rrr;
+	int		sa;
+	int		sb;
+	int		ss;
+	int		pa;
+	int		pb;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
 }				t_bench;
 
 //linked list manipulation
