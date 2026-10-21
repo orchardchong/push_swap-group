@@ -12,15 +12,18 @@
 
 #include "push_swap.h"
 
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args, t_bench *bench)
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args,
+	t_bench *bench)
 {
 	float	disorder;
 
 	disorder = disorder_metrics(stack_a);
+	if (bench == NULL || bench->active == 1)
+		bench->disorder = disorder;
 	if (disorder < 0.2)
 		selection(stack_a, stack_b, bench);
 	else if (disorder >= 0.2 && disorder < 0.5)
-		chunk_sort(stack_a, stack_b, args);
+		chunk_sort(stack_a, stack_b, args, bench);
 	else if (disorder >= 0.5)
-		radix_sort(stack_a, stack_b, args);
+		radix_sort(stack_a, stack_b, args, bench);
 }

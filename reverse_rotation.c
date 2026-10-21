@@ -6,13 +6,13 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 08:53:38 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 20:19:39 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 20:17:03 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_stack *stack, int print_rrr)
+void	rra(t_stack *stack, int print_rrr, t_bench *bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
@@ -22,13 +22,13 @@ void	rra(t_stack *stack, int print_rrr)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->rra++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("rra\n");
 	}
 }
 
-void	rrb(t_stack *stack, int print_rrr)
+void	rrb(t_stack *stack, int print_rrr, t_bench *bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
@@ -38,20 +38,20 @@ void	rrb(t_stack *stack, int print_rrr)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->rrb++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("rrb\n");
 	}
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b)
+void	rrr(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
-	rra(stack_a, 1);
-	rrb(stack_b, 1);
+	rra(stack_a, 1, bench);
+	rrb(stack_b, 1, bench);
 	if (bench != NULL && bench->active == 1)
 	{
-		bench->rra++;
-		bench->total_ops++
+		bench->rrr++;
+		bench->total_ops++;
 	}
 	ft_printf("rrr\n");
 }

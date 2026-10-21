@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 09:25:46 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 22:24:02 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 20:06:29 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 AWARE: make sure not pointer is pointing to any of the first 2 nodes, else
 might have unexpected behaviour as the tracked node will have changed values.
 */
-void	sa(t_stack *stack, int print_ss, t_bench bench)
+void	sa(t_stack *stack, int print_ss, t_bench *bench)
 {
 	int	num;
 	int	sorted_index;
@@ -34,13 +34,13 @@ void	sa(t_stack *stack, int print_ss, t_bench bench)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->sa++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("sa\n");
 	}
 }
 
-void	sb(t_stack *stack, int print_ss, t_bench bench)
+void	sb(t_stack *stack, int print_ss, t_bench *bench)
 {
 	int	num;
 	int	sorted_index;
@@ -58,20 +58,20 @@ void	sb(t_stack *stack, int print_ss, t_bench bench)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->sb++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("sb\n");
 	}
 }
 
-void	ss(t_stack *stack_a, t_stack *stack_b, t_bench bench)
+void	ss(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
-	sa(stack_a, 1);
-	sb(stack_b, 1);
+	sa(stack_a, 1, bench);
+	sb(stack_b, 1, bench);
 	if (bench != NULL && bench->active == 1)
 		{
 			bench->ss++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 	ft_printf("ss\n");
 }

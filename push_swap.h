@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 19:58:30 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 22:34:59 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,25 @@ void	ft_doubly_lstadd_front(t_stack *stack, t_node *new);
 void	ft_clearstack(t_stack *stack);
 
 //operations
-void	ra(t_stack *stack, int print_rr);
-void	rb(t_stack *stack, int print_rr);
-void	rr(t_stack *stack_a, t_stack *stack_b);
-void	rra(t_stack *stack, int print_rrr);
-void	rrb(t_stack *stack, int print_rrr);
-void	rrr(t_stack *stack_a, t_stack *stack_b);
-void	sa(t_stack *stack, int print_ss);
-void	sb(t_stack *stack, int print_ss);
-void	ss(t_stack *stack_a, t_stack *stack_b);
-void	pa(t_stack *stack_a, t_stack *stack_b);
-void	pb(t_stack *stack_a, t_stack *stack_b);
+void	ra(t_stack *stack, int print_rr, t_bench *bench);
+void	rb(t_stack *stack, int print_rr, t_bench *bench);
+void	rr(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
+void	rra(t_stack *stack, int print_rrr, t_bench *bench);
+void	rrb(t_stack *stack, int print_rrr, t_bench *bench);
+void	rrr(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
+void	sa(t_stack *stack, int print_ss, t_bench *bench);
+void	sb(t_stack *stack, int print_ss, t_bench *bench);
+void	ss(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
+void	pa(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
+void	pb(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //radix and its utils
-void	radix_sort(t_stack *a, t_stack *b, char **args);
+void	radix_sort(t_stack *a, t_stack *b, char **args, t_bench *bench);
 int		get_max_num_bits_count(int max);
 int		count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit);
 
 //chunk sort
-void	chunk_sort(t_stack *a, t_stack *b, char **args);
+void	chunk_sort(t_stack *a, t_stack *b, char **args, t_bench *bench);
 
 // radix and chunk sort common utils
 void	assign_sorted_index(t_stack *stack, char **args);
@@ -91,12 +91,15 @@ void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split);
 int		is_sorted(t_stack *stack_a);
 
 //handle 3 arguments
-int		sorted_three(t_stack *stack_a);
+int		sorted_three(t_stack *stack_a, t_bench *bench);
 
 //simple algorithm
 t_node	*get_min_node(t_stack *stack_a);
-void	selection(t_stack *stack_a, t_stack *stack_b);
+void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //adaptive algorithm
 void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args, t_bench *bench);
+
+//bench
+void	print_benchmark(t_bench *bench);
 #endif 

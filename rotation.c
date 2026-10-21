@@ -6,14 +6,14 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 20:25:01 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/20 00:21:01 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/20 20:04:41 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "push_swap.h"
 
-void	ra(t_stack *stack, int print_rr, t_bench bench)
+void	ra(t_stack *stack, int print_rr, t_bench *bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
@@ -23,13 +23,13 @@ void	ra(t_stack *stack, int print_rr, t_bench bench)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->ra++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("ra\n");
 	}
 }  
 
-void	rb(t_stack *stack, int print_rr, t_bench bench)
+void	rb(t_stack *stack, int print_rr, t_bench *bench)
 {
 	if (!stack || stack->size < 2)
 		return ;
@@ -39,20 +39,20 @@ void	rb(t_stack *stack, int print_rr, t_bench bench)
 		if (bench != NULL && bench->active == 1)
 		{
 			bench->rb++;
-			bench->total_ops++
+			bench->total_ops++;
 		}
 		ft_printf("rb\n");
 	}
 }
 
-void	rr(t_stack *stack_a, t_stack *stack_b, t_bench bench)
+void	rr(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
 	ra(stack_a, 1,bench);
 	rb(stack_b, 1,bench);
 	if (bench != NULL && bench->active == 1)
 	{
 		bench->rr++;
-		bench->total_ops++
+		bench->total_ops++;
 	}
 	ft_printf("rr\n");
 }

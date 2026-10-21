@@ -38,13 +38,13 @@ void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 	{
 		min_node = get_min_node(stack_a);
 		while (stack_a->top != min_node)
-			ra(stack_a, 0); 
-		pb(stack_a, stack_b, 0);
+			ra(stack_a, 0, bench); 
+		pb(stack_a, stack_b, bench);
 	}
 	if (stack_a->size == 3)
-		sorted_three(stack_a);
+		sorted_three(stack_a, bench);
 	while (stack_b->size > 0)
-		pa(stack_a, stack_b);
+		pa(stack_a, stack_b, bench);
 }
 
 /*#include <stdio.h>

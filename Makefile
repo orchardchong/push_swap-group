@@ -1,24 +1,22 @@
 NAME = push_swap
 LIBFTPRINTF = ./ft_printf/libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
-FUNCS	= disorder_metrics \
+FUNCS	= adaptive \
+		  bench \
+		  chunk \
+		  disorder_metrics \
+		  is_sorted \
 		  main \
 		  parsing \
 		  push \
+		  radix_utils \
+		  radix \
 		  reverse_rotation \
 		  rotation \
+		  selection \
 		  stack \
 		  swap \
 		  to_clear_and_erase \
-		  radix_utils \
-		  radix \
-<<<<<<< HEAD
-		  adaptive \
-		  selection \
-		  is_sorted \
-=======
-		  chunk
->>>>>>> 680898dfe8041dff099c1fe27bf779d5afd44c15
 
 SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 06:41:09 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/19 22:15:23 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/20 22:27:31 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	find_node_pos(t_stack *s, int sorted_index)
 		cost would be 11/2 = 5
 	using < will go to else branch, costing 6 ops instead of 5
 */
-static void	push_max_to_a(t_stack *a, t_stack *b)
+static void	push_max_to_a(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	cost;
 	int	pos;
@@ -88,15 +88,15 @@ static void	push_max_to_a(t_stack *a, t_stack *b)
 		{
 			cost = pos;
 			while (cost--)
-				rb(b, 0);
+				rb(b, 0, bench);
 		}
 		else
 		{
 			cost = b->size - pos;
 			while (cost--)
-				rrb(b, 0);
+				rrb(b, 0, bench);
 		}
-		pa(a, b);
+		pa(a, b, bench);
 	}
 }
 
@@ -105,7 +105,7 @@ static void	push_max_to_a(t_stack *a, t_stack *b)
 chunk_start_i + chunk_size is always bigger.
 
 */
-void	chunk_sort(t_stack *a, t_stack *b, char **args)
+void	chunk_sort(t_stack *a, t_stack *b, char **args, t_bench *bench)
 {
 	int	chunk_start_i;
 	int	chunk_size;
@@ -117,17 +117,17 @@ void	chunk_sort(t_stack *a, t_stack *b, char **args)
 	{
 		if (a->top->sorted_index < chunk_start_i)
 		{
-			pb(a, b);
-			rb(b, 0);
+			pb(a, b, bench);
+			rb(b, 0, bench);
 			chunk_start_i++;
 		}
 		else if (a->top->sorted_index < chunk_start_i + chunk_size)
 		{
-			pb(a, b);
+			pb(a, b, bench);
 			chunk_start_i++;
 		}
 		else
-			ra(a, 0);
+			ra(a, 0, bench);
 	}
-	push_max_to_a(a, b);
+	push_max_to_a(a, b, bench);
 }
