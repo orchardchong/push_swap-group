@@ -40,6 +40,25 @@ static void	print_bench_ops(t_bench *bench)
 	ft_putstr_fd("\n", 2);
 }
 
+static void	algo_decided(t_bench *bench)
+{
+	if (bench->strategy == 0)
+	{
+		if (bench->disorder < 0.20)
+			ft_putstr_fd("Adaptive / O(n^2)\n", 2);
+		else if (bench->disorder >= 0.20 && bench->disorder < 0.50)
+			ft_putstr_fd("Adaptive / O(n√n)\n", 2);
+		else
+			ft_putstr_fd("Adaptive / O(n log n)\n", 2);
+	}
+	else if (bench->strategy == 1)
+		ft_putstr_fd("Simple O(n^2)\n", 2);
+	else if (bench->strategy == 2)
+		ft_putstr_fd("Medium O(n√n)\n", 2);
+	else if (bench->strategy == 3)
+		ft_putstr_fd("Complex O(n log n)\n", 2);
+}
+
 void	print_benchmark(t_bench *bench)
 {
 	int	front_digit;
@@ -56,14 +75,7 @@ void	print_benchmark(t_bench *bench)
 		ft_putstr_fd("0", 2);
 	ft_putnbr_fd(decimal, 2);
 	ft_putstr_fd("%\n[bench] strategy: ", 2);
-	if (bench->strategy == 0)
-		ft_putstr_fd("Adaptive / Auto\n", 2);
-	else if (bench->strategy == 1)
-		ft_putstr_fd("Simple O(n^2)\n", 2);
-	else if (bench->strategy == 2)
-		ft_putstr_fd("Medium O(n√n)\n", 2);
-	else if (bench->strategy == 3)
-		ft_putstr_fd("Complex O(n log n)\n", 2);
+	algo_decided(bench);
 	ft_putstr_fd("[bench] total_ops: ", 2);
 	ft_putnbr_fd(bench->total_ops, 2);
 	print_bench_ops(bench);
