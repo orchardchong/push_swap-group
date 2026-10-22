@@ -32,7 +32,7 @@ rra ×2:   A [1 1 X Y]  → sort_a(…, 2) takes the top 2 = 1 1   ✓
 1. After pb, a->size shrinks by zeroes after pb, so stacksize - zeroes
 2. in stack a, if the bit_pos has 0s, pushed to b
 */
-static int	split_a(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *bench)
+static int	split_a(t_stacks *s, int bit_pos, int stacksize, t_bench *bench)
 {
 	int	i;
 	int	zeroes;
@@ -40,27 +40,27 @@ static int	split_a(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *
 
 	i = 0;
 	rra_count = 0;
-	zeroes = count_matching_bit(a, stacksize, bit_pos, 0);
+	zeroes = count_matching_bit(s->a, stacksize, bit_pos, 0);
 	while (i < zeroes)
 	{
-		if ((a->top->sorted_index >> bit_pos & 1) == 0)
+		if ((s->a->top->sorted_index >> bit_pos & 1) == 0)
 		{
-			pb(a, b, bench);
+			pb(s->a, s->b, bench);
 			i++;
 		}
 		else
 		{
-			ra(a, 0, bench);
+			ra(s->a, 0, bench);
 			rra_count++;
 		}
 	}
-	if (stacksize - zeroes < a->size)
+	if (stacksize - zeroes < s->a->size)
 		while (rra_count--)
-			rra(a, 0, bench);
+			rra(s->a, 0, bench);
 	return (zeroes);
 }
 
-static int	split_b(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *bench)
+static int	split_b(t_stacks *s, int bit_pos, int stacksize, t_bench *bench)
 {
 	int	i;
 	int	ones;
@@ -68,31 +68,32 @@ static int	split_b(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *
 
 	i = 0;
 	rrb_count = 0;
-	ones = count_matching_bit(b, stacksize, bit_pos, 1);
+	ones = count_matching_bit(s->b, stacksize, bit_pos, 1);
 	while (i < ones)
 	{
-		if ((b->top->sorted_index >> bit_pos & 1) == 1)
+		if ((s->b->top->sorted_index >> bit_pos & 1) == 1)
 		{
-			pa(a, b, bench);
+			pa(s->a, s->b, bench);
 			i++;
 		}
 		else
 		{
-			rb(b, 0, bench);
+			rb(s->b, 0, bench);
 			rrb_count++;
 		}
 	}
-	if (stacksize - ones < b->size)
+	if (stacksize - ones < s->b->size)
 		while (rrb_count--)
-			rrb(b, 0, bench);
+			rrb(s->b, 0, bench);
 	return (ones);
 }
-static void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *bench);
+
+static void	sort_b(t_stacks *s, int bit_pos, int stacksize, t_bench *bench);
+
 /*
 bit_post should be max_bit_count - 1 at start
 */
-
-static void	sort_a(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *bench)
+static void	sort_a(t_stacks *s, int bit_pos, int stacksize, t_bench *bench)
 {
 	int	zeroes;
 	int	ones;
@@ -101,32 +102,36 @@ static void	sort_a(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *
 		return ;
 	if (stacksize == 1)
 	{
-		pb(a, b, bench);
+		pb(s->a, s->b, bench);
 		return ;
 	}
-	zeroes = split_a(a, b, bit_pos - 1, stacksize, bench);
+	zeroes = split_a(s, bit_pos - 1, stacksize, bench);
 	ones = stacksize - zeroes;
-	sort_b(a, b, bit_pos - 1, zeroes, bench);
-	sort_a(a, b, bit_pos - 1, ones, bench);
+	sort_b(s, bit_pos - 1, zeroes, bench);
+	sort_a(s, bit_pos - 1, ones, bench);
 }
 
-static void	sort_b(t_stack *a, t_stack *b, int bit_pos, int stacksize, t_bench *bench)
+static void	sort_b(t_stacks *s, int bit_pos, int stacksize, t_bench *bench)
 {
 	int	zeroes;
 	int	ones;
 
 	if (stacksize < 2)
 		return ;
-	ones = split_b(a, b, bit_pos - 1, stacksize, bench);
+	ones = split_b(s, bit_pos - 1, stacksize, bench);
 	zeroes = stacksize - ones;
-	sort_b(a, b, bit_pos - 1, zeroes, bench);
-	sort_a(a, b, bit_pos - 1, ones, bench);
+	sort_b(s, bit_pos - 1, zeroes, bench);
+	sort_a(s, bit_pos - 1, ones, bench);
 }
 
 void	radix_sort(t_stack *a, t_stack *b, char **args, t_bench *bench)
 {
+	t_stacks	s;
+
+	s.a = a;
+	s.b = b;
 	assign_sorted_index(a, args);
-	sort_a(a, b, get_max_num_bits_count(a->size), a->size, bench);
+	sort_a(&s, get_max_num_bits_count(a->size), a->size, bench);
 	while (b->size)
 		pa(a, b, bench);
 }

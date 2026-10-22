@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/21 20:34:55 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/22 17:12:19 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct s_stack
 	t_node	*top;
 	int		size;
 }				t_stack;
+
+//for radix's recursive functions, make 5 param to 4 to satisfy norminette
+typedef struct s_stacks
+{
+	t_stack	*a;
+	t_stack	*b;
+}				t_stacks;
 
 typedef struct s_bench
 {
@@ -70,7 +77,7 @@ void	pb(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 //radix and its utils
 void	radix_sort(t_stack *a, t_stack *b, char **args, t_bench *bench);
 int		get_max_num_bits_count(int max);
-int		count_matching_bit (t_stack *stack, int stacksize, int bit_pos, int bit);
+int		count_matching_bit(t_stack *stack, int stacksize, int bit_pos, int bit);
 
 //chunk sort
 void	chunk_sort(t_stack *a, t_stack *b, char **args, t_bench *bench);
