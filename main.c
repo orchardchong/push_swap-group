@@ -148,6 +148,10 @@ static void	initialize_data(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 //to check is it sorted in "1 2 3" do ft_clearstack & free_array
 //ft_clearstack always exist because of node is created
 
+//to check "" or "   ": ft_split returns [NULL] (no words), not NULL,
+//so check_parsing_create_node loops 0 times and no Error is printed.
+//!args catches ft_split malloc fail, !args[0] catches no numbers.
+
 int	main(int argc, char *argv[])
 {
 	t_stack	stack_a;
@@ -156,12 +160,14 @@ int	main(int argc, char *argv[])
 	char	**args;
 
 	initialize_data(&stack_a, &stack_b, &bench);
-	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
+	if (argc == 1)
 		return (0);
 	check_flags (&argc, &argv, &bench);
 	args = argv + 1;
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
+	if (!args || !args[0])
+		free_and_erase(&stack_a, args, argc == 2);
 	check_parsing_create_node(&stack_a, args, argc == 2);
 	if (is_sorted(&stack_a) == 0)
 		sorting_exercution (&stack_a, &stack_b, args, &bench);

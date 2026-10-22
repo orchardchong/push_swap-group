@@ -6,7 +6,7 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/22 17:12:19 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/22 18:01:44 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ t_node	*get_min_node(t_stack *stack_a);
 void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //adaptive algorithm
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args, t_bench *bench);
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b,
+			char **args, t_bench *bench);
 
 //bench
 void	print_benchmark(t_bench *bench);
