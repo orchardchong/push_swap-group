@@ -21,6 +21,14 @@ FUNCS	= adaptive \
 SRCS = $(FUNCS:=.c)
 OBJS = $(SRCS:.c=.o)
 
+# checker reuses every push_swap object except main.o (two main())
+BONUS_NAME = checker
+BONUS_FUNCS = checker_bonus \
+			  checker_utils_bonus \
+			  get_next_line/get_next_line \
+
+BONUS_OBJS = $(BONUS_FUNCS:=.o) $(filter-out main.o, $(OBJS))
+
 all: $(NAME)
 
 # during linking ,-I flag is no needed.
@@ -34,7 +42,12 @@ $(NAME): $(OBJS) $(LIBFTPRINTF)
 	cc $(CFLAGS) $(OBJS) $(LIBFTPRINTF) -o $(NAME)
 
 $(LIBFTPRINTF):
-	make -C ./ft_printf 
+	make -C ./ft_printf
+
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS) $(LIBFTPRINTF)
+	cc $(CFLAGS) $(BONUS_OBJS) $(LIBFTPRINTF) -o $(BONUS_NAME)
 
 # gdb runs on the compiled program, i.e gdb ./a.out.
 # if a.out is not compiled with -g, then mapping of
@@ -49,19 +62,19 @@ $(LIBFTPRINTF):
 # libft.h, so need to tell compiler where to find them using
 # -I
 %.o: %.c push_swap.h
-	cc $(CFLAGS) -c -g -I ./libft -I ./ft_printf $< -o $@ 
+	cc $(CFLAGS) -c -g -I ./libft -I ./ft_printf -I ./get_next_line $< -o $@
 
 fclean: clean
 	make fclean -C ./ft_printf
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 clean:
 	make clean -C ./ft_printf
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 re: fclean all
 
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./push_swap $(ARGS)
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re valgrind bonus

@@ -12,30 +12,6 @@
 
 #include "push_swap.h"
 
-void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
-{
-	t_node	*new_node;
-	long	num;
-	int		i;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (!is_num(argv[i]))
-			free_and_erase(stack_a, argv, is_split);
-		num = ft_atol(argv[i]);
-		if ((num > 2147483647) || (num < -2147483648))
-			free_and_erase(stack_a, argv, is_split);
-		if (check_duplicate(stack_a, num))
-			free_and_erase(stack_a, argv, is_split);
-		new_node = ft_doubly_lstnew((int)(num));
-		if (!new_node)
-			free_and_erase(stack_a, argv, is_split);
-		ft_doubly_lstadd_back(stack_a, new_node);
-		i++;
-	}
-}
-
 //argv++ skip the ./a.out
 //remove the ./a.out so the total arguments will minus 1
 //the first if is to handle --bench --simple
