@@ -6,7 +6,7 @@
 /*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/21 20:34:55 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/22 17:50:32 by ochong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ t_node	*get_min_node(t_stack *stack_a);
 void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //adaptive algorithm
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b, char **args, t_bench *bench);
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b,
+	char **args, t_bench *bench);
 
 //bench
 void	print_benchmark(t_bench *bench);
