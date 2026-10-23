@@ -3,43 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 19:29:12 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/22 22:39:24 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/23 22:38:03 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-/*
-get_next_line keeps unread input in its static stash. Reading until NULL
-lets it free the stash, so exiting on Error does not leave it allocated.
-
-Why a loop and not 1 call: lines can still come after the bad one.
-Example, typed by hand:
-	./checker 2 1 3
-	bad⏎        <- invalid, read_and_apply calls drain_stdin
-	pa⏎         <- typed before Ctrl+D
-	^D
-
-	call 1: returns "pa\n" (not NULL), freed. stash = "" (still malloc'd)
-	call 2: read() gets EOF, stash "" is freed, returns NULL -> loop ends
-With only 1 call, the "" stash from call 1 would leak (1 byte).
-*/
-static void	drain_stdin(void)
-{
-	char	*line;
-
-	line = get_next_line(0);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(0);
-	}
-}
-
-//invalid instruction: free everything, then free_and_erase prints Error
 static void	read_and_apply(t_stacks *s)
 {
 	char	*line;
@@ -50,9 +22,11 @@ static void	read_and_apply(t_stacks *s)
 		if (!apply_op(s, line))
 		{
 			free(line);
-			drain_stdin();
+			get_next_line(-1);
 			ft_clearstack(s->b);
-			free_and_erase(s->a, NULL, 0);
+			ft_clearstack(s->a);
+			ft_putstr_fd("Error\n", 2);
+			exit(1);
 		}
 		free(line);
 		line = get_next_line(0);
@@ -98,3 +72,44 @@ int	main(int argc, char *argv[])
 	ft_clearstack(&b);
 	return (0);
 }
+/*HOW read() GIVES INPUT TO get_next_line (BUFFER_SIZE = 10)
+
+read() only waits when nothing is available otherwise keep reading 
+(man 3 termios).
+https://man7.org/linux/man-pages/man3/termios.3.html
+
+1. typing, line shorter than BUFFER_SIZE: "sa" + Enter
+	read() waits until Enter, then returns "sa\n" (1 line per read).
+2. typing, line longer than BUFFER_SIZE: "sass gde idjs" + Enter
+	Enter puts all 14 bytes in the terminal buffer.
+	read() -> "sass gde i" (no '\n', GNL's while loop reads again)
+	read() -> "djs\n"      (no wait for user until finish reading)
+3. piping: printf 'sa\nbad\nra\n' | ./checker 2 1 3
+	read() -> sa\nbad\nra\n, returned -> sa\n, stash -> bad\nra\n, 
+
+WHY THE STASH LEAKS ON Error
+Case1: After every returned line, stash is still malloc'd: "".
+Without next gnl() to accept EOF from user, "" is always there.
+Just like using gnl() on files, after finish reading the content,
+1 more call is needed to reach EOF, and free "".
+
+Case3: if the piped input has a lot of \n, needs to drain_stdin()
+Because every gnl() called only returned up to \n, if the stash needs
+to be empty, 1 way is to repeatedly called gnl().
+
+FIX: get_next_line(-1)
+Reset the stash ourselves to prevent repeated calls like this:
+static void	drain_stdin(void)
+{
+	char	*line;
+
+	line = get_next_line(0);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(0);
+	}
+}
+It makes more sense to stop the program when input is wrong instead
+of having to wait for EOF from user.
+*/
