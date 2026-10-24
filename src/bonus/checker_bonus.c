@@ -6,11 +6,40 @@
 /*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 19:29:12 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/23 22:38:03 by junlim           ###   ########.fr       */
+/*   Updated: 2026/10/24 21:28:24 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+
+static void	print_stacks(t_stacks *s)
+{
+	t_node	*a;
+	t_node	*b;
+	int		i;
+
+	a = s->a->top;
+	b = s->b->top;
+	i = 0;
+	while (i < s->a->size || i < s->b->size)
+	{
+		if (i < s->a->size)
+		{
+			ft_printf("%d   ", a->num);
+			a = a->next;
+		}
+		else
+			ft_printf("%d   ");
+		if (i < s->b->size)
+		{
+			ft_printf("%d", b->num);
+			b = b->next;
+		}
+		ft_printf("\n");
+		i++;
+	}
+	ft_printf("-   -\na   b\n==========\n");
+}
 
 static void	read_and_apply(t_stacks *s)
 {
@@ -28,6 +57,8 @@ static void	read_and_apply(t_stacks *s)
 			ft_putstr_fd("Error\n", 2);
 			exit(1);
 		}
+		if (VISUAL)
+			print_stacks(s);
 		free(line);
 		line = get_next_line(0);
 	}
@@ -41,13 +72,17 @@ static void	parse_args(t_stack *a, int argc, char **argv)
 	args = argv + 1;
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
-	if (!args || !args[0])
-		free_and_erase(a, args, argc == 2);
 	check_parsing_create_node(a, args, argc == 2);
 	if (argc == 2)
 		free_array(args);
 }
 
+/*
+According to subject.pdf, we only check the stack a is actually sorted
+after executing instructions, not at the beginning.
+
+"If after executing those instructions, the stack a is actually sorted..."
+*/
 int	main(int argc, char *argv[])
 {
 	t_stack		a;
@@ -112,4 +147,46 @@ static void	drain_stdin(void)
 }
 It makes more sense to stop the program when input is wrong instead
 of having to wait for EOF from user.
+*/
+
+/*v1
+static void	print_stacks(t_stacks *s)
+{
+	t_node*	a_current;
+	t_node*	b_current;
+	int		total;
+	int		i;
+	int		spaces;
+
+	i = 0;
+	if (s->a->size > s->b->size)
+		total = s->a->size;
+	else
+		total = s->b->size;
+	a_current = s->a->top;
+	b_current = s->b->top;
+	while (i < total)
+	{
+		spaces = 3;
+		if (i < s->a->size && a_current)
+		{
+			ft_printf("%d", a_current->num);
+			a_current = a_current->next;
+		}
+		else
+			spaces = 4;
+		while (spaces--)
+			ft_printf(" ");
+		if (i < s->b->size && b_current)
+		{
+			ft_printf("%d", b_current->num);
+			b_current = b_current->next;
+		}
+		i++;
+		ft_printf("\n");
+	}
+	ft_printf("-   -\n");
+	ft_printf("a   b\n");
+	ft_printf("==========\n");
+}
 */
