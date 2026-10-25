@@ -92,6 +92,8 @@ void	check_parsing_create_node(t_stack *stack_a, char **argv, int is_split)
 	int		i;
 
 	i = 0;
+	if (!argv || !argv[0])
+		free_and_erase(stack_a, argv, is_split);
 	while (argv[i])
 	{
 		if (!is_num(argv[i]))

@@ -23,12 +23,11 @@ GDB runs ./a.out
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/push_swap",
-            "args": ["5 2 7 1 4 3"],
+            "args": ["--bench", "--simple", "\"5 4 3 2 1\""],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "externalConsole": false,
             "MIMode": "gdb",
-            "preLaunchTask": "build-debug",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

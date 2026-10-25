@@ -30,10 +30,7 @@ int	is_sorted(t_stack *stack_a)
 	}
 	return (1);
 }
-
-//312
-//231
-//213
+//test
 
 int	sorted_three(t_stack *stack_a, t_bench *bench)
 {

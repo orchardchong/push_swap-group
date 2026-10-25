@@ -142,8 +142,6 @@ int	main(int argc, char *argv[])
 	args = argv + 1;
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
-	if (!args || !args[0])
-		free_and_erase(&stack_a, args, argc == 2);
 	check_parsing_create_node(&stack_a, args, argc == 2);
 	if (is_sorted(&stack_a) == 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochong <ochong@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: junlim <junlim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 20:49:24 by junlim            #+#    #+#             */
-/*   Updated: 2026/10/22 22:02:03 by ochong           ###   ########.fr       */
+/*   Updated: 2026/10/24 20:20:04 by junlim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	selection(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //adaptive algorithm
 void	adaptive_sort(t_stack *stack_a, t_stack *stack_b,
-	char **args, t_bench *bench);
+			char **args, t_bench *bench);
 
 //bench
 void	print_benchmark(t_bench *bench);
