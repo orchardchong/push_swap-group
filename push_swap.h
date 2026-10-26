@@ -13,6 +13,11 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+//set by make selection / chunk / radix, 0 means use flags as normal
+# ifndef FORCE_STRAT
+#  define FORCE_STRAT 0
+# endif
+
 # include "ft_printf.h"
 
 typedef struct s_node
@@ -105,6 +110,9 @@ int		is_sorted(t_stack *stack_a);
 
 //handle 3 arguments
 int		sorted_three(t_stack *stack_a, t_bench *bench);
+
+//handle 2 to 5 arguments
+void	small_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 
 //simple algorithm
 t_node	*get_min_node(t_stack *stack_a);

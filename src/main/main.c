@@ -43,7 +43,14 @@ static void	check_flags(int *argc, char ***argv, t_bench *bench)
 static void	sorting_exercution(t_stack *stack_a, t_stack *stack_b,
 	char **args, t_bench *bench)
 {
-	if (bench->strategy == 1)
+	if (FORCE_STRAT != 0)
+		bench->strategy = FORCE_STRAT;
+	if (stack_a->size <= 5)
+	{
+		bench->strategy = 4;
+		small_sort(stack_a, stack_b, bench);
+	}
+	else if (bench->strategy == 1)
 		selection (stack_a, stack_b, bench);
 	else if (bench->strategy == 2)
 		chunk_sort (stack_a, stack_b, args, bench);

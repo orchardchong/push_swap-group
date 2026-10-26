@@ -57,6 +57,8 @@ static void	algo_decided(t_bench *bench)
 		ft_putstr_fd("Medium O(n√n)\n", 2);
 	else if (bench->strategy == 3)
 		ft_putstr_fd("Complex O(n log n)\n", 2);
+	else if (bench->strategy == 4)
+		ft_putstr_fd("Small sort (n <= 5)\n", 2);
 }
 
 void	print_benchmark(t_bench *bench)

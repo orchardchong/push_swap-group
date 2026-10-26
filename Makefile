@@ -9,7 +9,7 @@ MAIN_DIR = src/main
 OPS_DIR = src/ops
 NORM_DIRS = $(ALGO_DIR) $(BONUS_DIR) $(MAIN_DIR) $(OPS_DIR) get_next_line 
 
-ALGO  = adaptive chunk radix_utils radix selection
+ALGO  = adaptive chunk radix_utils radix selection small_sort
 MAIN  = bench disorder_metrics is_sorted main parsing stack to_clear_and_erase
 OPS	  = push reverse_rotation rotation swap
 
@@ -53,6 +53,17 @@ visual:
 	rm -f $(BONUS_DIR)/checker_bonus.o
 	make bonus CFLAGS="$(CFLAGS) -D VISUAL=1"
 	rm -f $(BONUS_DIR)/checker_bonus.o
+
+# build ./push_swap that always uses one algo (small sort still for <= 5),
+# for testers that run ./push_swap without flags
+selection: STRAT = 1
+chunk: STRAT = 2
+radix: STRAT = 3
+selection chunk radix:
+	rm -f $(MAIN_DIR)/main.o
+	make $(NAME) CFLAGS="$(CFLAGS) -D FORCE_STRAT=$(STRAT)"
+	rm -f $(MAIN_DIR)/main.o
+
 # gdb runs on the compiled program, i.e gdb ./a.out.
 # if a.out is not compiled with -g, then mapping of
 # source lines to machine address is not known.
@@ -86,4 +97,4 @@ valgrind:
 
 norm:
 	norminette $(NORM_DIRS) push_swap.h
-.PHONY: all clean fclean re valgrind bonus visual norm
+.PHONY: all clean fclean re valgrind bonus visual norm selection chunk radix
